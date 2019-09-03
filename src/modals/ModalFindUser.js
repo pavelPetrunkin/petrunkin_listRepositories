@@ -56,7 +56,6 @@ const FindUser = (props) => {
     };
 
     useEffect(() => {
-        console.log(state);
 
         if(state.openResult){
             setTimeout(() => {
@@ -81,9 +80,9 @@ const FindUser = (props) => {
         const inputCheck = validateUser(userName);
         if(inputCheck){
             props.onFindUser(userName);
-            handleClose();
             setState({
                 ...state,
+                open:false,
                 openResult: true
             });
         } else {

@@ -2,6 +2,7 @@ import {
     GET_USER_REPOSITORIES_REQUEST,
     FILTER_REPOSITORIES,
     SEARCH_REPOSITORIES,
+    GET_USER_REQUEST,
     CHANGE_PAGE,
 } from './types';
 
@@ -12,6 +13,13 @@ export const getUserRepositories = id => {
     }
 };
 
+export const findUser = (userName) => {
+    return {
+        type: GET_USER_REQUEST,
+        payload: userName,
+    }
+};
+
 export const filters = (filterType) => {
     return {
         type: FILTER_REPOSITORIES,
@@ -19,12 +27,7 @@ export const filters = (filterType) => {
     }
 };
 
-export const findUser = (userName) => {
-    return {
-        type: FILTER_REPOSITORIES,
-        payload: userName,
-    }
-};
+
 
 export const searchRepositories = (text) => {
     return {

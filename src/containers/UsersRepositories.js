@@ -8,15 +8,6 @@ import ModalFindUser from "../modals/ModalFindUser";
 import OneRepositories from "../components/OneRepositories";
 
 const UsersRepositories = (props) => {
-
-        if(!props.repositories.length) {
-            return (
-                <div style={{margin:'0 auto',maxWidth:'150px',textAlign: 'center'}}>
-                    <ModalFindUser/>
-                    <p>User repositories</p>
-                </div>
-            )
-        }
         let renderRepositories = paginationFilter(
             props.repositories,
             props.filterType,
@@ -26,6 +17,10 @@ const UsersRepositories = (props) => {
         );
         return (
             <div>
+                <div style={{margin:'0 auto',maxWidth:'150px',textAlign: 'center'}}>
+                    <ModalFindUser/>
+                    {props.userName ? <p>User repositories</p> : <p>No user</p>}
+                </div>
                 <div style={{margin:'0 auto',maxWidth:'300px',textAlign: 'center'}}>
                     <FilterRepositories />
                 </div>

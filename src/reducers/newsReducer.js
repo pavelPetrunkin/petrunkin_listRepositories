@@ -4,6 +4,7 @@ import {
     GET_USER_REPOSITORIES_SUCCESS,
     SEARCH_REPOSITORIES_SUCCESS,
     FILTER_REPOSITORIES_SUCCESS,
+    GET_USER_REPOSITORES_FAILED,
     CHANGE_PAGE_SUCCESS,
 } from '../actions/types';
 
@@ -16,10 +17,6 @@ const initialState = {
     userName:'',
     userEmail:'',
     requestSuccess:'',
-    avatar: '',
-    userId:'',
-    provider:'',
-    redirectToReferrer: false,
 };
 
 export default function repositoriesReducer(state = initialState, action) {
@@ -28,10 +25,15 @@ export default function repositoriesReducer(state = initialState, action) {
     switch (action.type) {
         case GET_USER_REPOSITORIES_SUCCESS:
             return {...state,
-                repositories: payload.repositories,
-                requestSuccess: payload.userData.status,
-                userName: payload.userData.username,
-                userEmail: payload.userData.email,
+                repositories: payload.data,
+                requestSuccess: payload.status,
+                userName: payload.request.username,
+                userEmail: payload.request.email,
+                searchText: '',
+            };
+        case GET_USER_REPOSITORES_FAILED:
+            return {...state,
+                requestSuccess: payload.status,
                 searchText: '',
             };
         case SEARCH_REPOSITORIES_SUCCESS:
