@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { connect } from 'react-redux';
 import {inputCheck,checkEmptyFields,validateUser} from '../helpers/inputCheck';
 import {
@@ -20,10 +20,9 @@ const FindUser = (props) => {
         values: {
             userName: '',
         },
-
-        fieldName: {
+        fieldUserName: {
             error: false,
-            value: 'Name',
+            value: 'User Name',
         },
         open: false,
         openResult: false,
@@ -39,7 +38,7 @@ const FindUser = (props) => {
     };
 
     const handleClickOpen = () => {
-        this.setState({
+        setState({...state,
             open: true
         });
     };
@@ -56,39 +55,54 @@ const FindUser = (props) => {
         })
     };
 
-    const handleSave = () => {
+    useEffect(() => {
+        console.log(state);
+
+        if(state.openResult){
+            setTimeout(() => {
+                handleResultClose();
+            }, 3000);
+        }
+        if(state.timer){
+            setTimeout( () => {
+                let objectFields = userTimerValidation();
+                setState(
+                    {...state,
+                        timer:false,
+                        fieldUserName: objectFields,
+                    }
+                );
+            }, 3000)
+        }
+    });
+
+    const handleFind = () => {
         let userName = checkEmptyFields(state.values);
         const inputCheck = validateUser(userName);
         if(inputCheck){
             props.onFindUser(userName);
             handleClose();
-            setState({...state,
+            setState({
+                ...state,
                 openResult: true
-            },() => setTimeout(() => {
-                handleResultClose();
-            }, 3000));
+            });
         } else {
             let objectFields = userValidation(inputCheck);
-            setState(...state,
-                objectFields
-            );
             if(!state.timer){
                 setState({...state,
-                    timer: true
-                }, () => {
-                    setTimeout( () => {
-                        let objectFields = userTimerValidation();
-                        setState(
-                            {...state,
-                                objectFields
-                            }
-                        );
-                    }, 3000)
+                    timer: true,
+                    fieldUserName: objectFields,
                 });
+            } else{
+                setState({...state,
+                    fieldUserName: objectFields,
+                    }
+                );
             }
+
+
         }
     };
-
     return (
         <div>
             <Button variant="outlined" color="primary" onClick={() => handleClickOpen()}>
@@ -105,12 +119,12 @@ const FindUser = (props) => {
                         margin="dense"
                         id="userName"
                         name='userName'
-                        label={state.fieldName.value}
+                        label={state.fieldUserName.value}
                         placeholder="*Required"
                         type="text"
                         defaultValue={''}
                         onChange={handleChange('userName')}
-                        error={state.fieldName.error}
+                        error={state.fieldUserName.error}
                         fullWidth
                     />
 
@@ -119,7 +133,7 @@ const FindUser = (props) => {
                     <Button onClick={() => handleClose()} color="primary">
                         Cancel
                     </Button>
-                    <Button onClick={() => handleSave()} color="primary">
+                    <Button onClick={() => handleFind()} color="primary">
                         Find user
                     </Button>
                 </DialogActions>

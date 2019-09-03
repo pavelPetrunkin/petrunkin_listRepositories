@@ -5,7 +5,6 @@ import SearchRepositories from "../components/SearchRepositories";
 import Pagination from "../components/Pagination";
 import paginationFilter from "../helpers/paginationFilter";
 import ModalFindUser from "../modals/ModalFindUser";
-import {getUserRepositories} from "../actions";
 import OneRepositories from "../components/OneRepositories";
 
 const UsersRepositories = (props) => {
@@ -51,15 +50,7 @@ const mapStateToProps = state => {
     };
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onGetUserRepositories: id => {
-            dispatch(getUserRepositories(id));
-        }
-    };
-};
-
 export default connect(
     mapStateToProps,
-    mapDispatchToProps,
+    null,
 )(UsersRepositories);

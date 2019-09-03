@@ -1,6 +1,4 @@
-/**
- * @return {{password: *, email: *, username: *}}
- */
+
 const checkEmptyFields = function(values) {
     const checkedFields = [];
     const nameFields = [];
@@ -13,8 +11,8 @@ const checkEmptyFields = function(values) {
     return checkedObjects;
 };
 
-function validateUser(name) {
-    return name !== '';
+function validateUser(data) {
+    return data.userName !== '';
 }
 
 const inputCheck = function(value) {
