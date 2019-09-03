@@ -15,6 +15,7 @@ const UsersRepositories = (props) => {
             props.currentPage,
             props.pageItems,
         );
+        console.log(props);
         return (
             <div>
                 <div style={{margin:'0 auto',maxWidth:'150px',textAlign: 'center'}}>
@@ -42,6 +43,9 @@ const mapStateToProps = state => {
         searchText: state.data.searchText,
         userName: state.data.userName,
         userEmail: state.data.userEmail,
+        filterType: state.data.filterType,
+        currentPage: state.data.currentPage,
+        pageItems: state.data.pageItems,
     };
 };
 

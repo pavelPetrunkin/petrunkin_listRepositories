@@ -4,15 +4,15 @@ import axios from 'axios';
 
 function* getUserRepositories(action) {
     const userUrl = `https://api.github.com/users/${action.payload.userName}`;
-    let payload;
+    const payload = {};
 
     try {
-        payload = yield call(async () => {
+        payload.userInfo = yield call(async () => {
                 return await axios.get(userUrl);
         });
-        if(payload.status === 200) {
-            const reposUrl = payload.data.repos_url;
-            payload = yield call(async () => {
+        if(payload.userInfo.status === 200) {
+            const reposUrl = payload.userInfo.data.repos_url;
+            payload.userRepositories = yield call(async () => {
                     return await axios.get(reposUrl);
             });
         }
@@ -20,7 +20,7 @@ function* getUserRepositories(action) {
         yield put({type: GET_USER_REPOSITORIES_SUCCESS, payload});
     } catch (e) {
         console.log(e);
-        yield put({type: "GET_USER_REPOSITORY_FAILED", message: e.message});
+        yield put({type: "GET_USER_REPOSITORIES_FAILED", e});
     }
 }
 

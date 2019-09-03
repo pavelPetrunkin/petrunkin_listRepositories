@@ -1,45 +1,43 @@
-const paginationFilter = function (news,filterType,searchText,currentPage,pageItems) {
-    let filteredNews = [],
+const paginationFilter = function (repositories,filterType,searchText,currentPage,pageItems) {
+    let filteredRepositories = [],
         renderItems = [],
         counter = 0,
         firstItem = (currentPage-1)*pageItems;
-    news.forEach( (item,i) => {
+    repositories.forEach( (item,i) => {
         if(filterType === 'All' ) {
             if(
-                ~item.tag.toLowerCase().indexOf(searchText.toLowerCase()) ||
+                ~item.html_url.toLowerCase().indexOf(searchText.toLowerCase()) ||
                 ~item.name.toLowerCase().indexOf(searchText.toLowerCase()) ||
-                ~item.text.toLowerCase().indexOf(searchText.toLowerCase()) ||
-                ~item.userName.toLowerCase().indexOf(searchText.toLowerCase()) ||
                 !searchText
             ){
-                filteredNews.push(i);
+                filteredRepositories.push(i);
             }
         } else if(filterType === 'Username'){
-            if(~item.userName.toLowerCase().indexOf(searchText.toLowerCase()) || !searchText){
-                filteredNews.push(i);
+            if(~item.name.toLowerCase().indexOf(searchText.toLowerCase()) || !searchText){
+                filteredRepositories.push(i);
             }
-        } else if(filterType === 'Tag') {
+        } else if(filterType === 'Email') {
 
-            if(~item.tag.toLowerCase().indexOf(searchText.toLowerCase()) || !searchText){
-                filteredNews.push(i);
+            if(~item.email.toLowerCase().indexOf(searchText.toLowerCase()) || !searchText){
+                filteredRepositories.push(i);
             }
         }
     });
-    for(let i = firstItem;i < filteredNews.length;i++){
-        if(filteredNews.length === pageItems){
-            return {fullFilter: filteredNews, filters: filteredNews};
+    for(let i = firstItem;i < filteredRepositories.length;i++){
+        if(filteredRepositories.length === pageItems){
+            return {fullFilter: filteredRepositories, filters: filteredRepositories};
         }
         if(counter === pageItems){
-            return !!renderItems.length ? {fullFilter: renderItems, filters: filteredNews}
-                : {fullFilter: filteredNews, filters: filteredNews};
+            return !!renderItems.length ? {fullFilter: renderItems, filters: filteredRepositories}
+                : {fullFilter: filteredRepositories, filters: filteredRepositories};
         }
-        if(filteredNews[i] >= firstItem){
-            renderItems.push(filteredNews[i]);
+        if(filteredRepositories[i] >= firstItem){
+            renderItems.push(filteredRepositories[i]);
             counter +=1;
         }
     }
-    return !!renderItems.length ? {fullFilter: renderItems, filters: filteredNews}
-                                : {fullFilter: filteredNews, filters: filteredNews};
+    return !!renderItems.length ? {fullFilter: renderItems, filters: filteredRepositories}
+                                : {fullFilter: filteredRepositories, filters: filteredRepositories};
 };
 
 export default paginationFilter;

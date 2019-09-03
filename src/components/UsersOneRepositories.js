@@ -9,14 +9,12 @@ const styles = {
     borderRadius: '7px'
 };
 
-export default ({ oneNews: { id, name,text,tag,userId, image }, onDelete }) => {
+export default ({props}) => {
+    console.log(props);
     return (
         <div style={ styles }>
-            <h2>{ name }</h2>
-            <p>{ text }</p>
-            <img src={ image }  alt=''/>
-            <p> { tag } </p>
-            <button className="btn btn-danger" type="button" onClick={() => onDelete(id)}>
+            <h2>Hello</h2>
+            <button className="btn btn-danger" type="button">
                 Remove
             </button>
         </div>

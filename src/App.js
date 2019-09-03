@@ -1,11 +1,10 @@
-import React, {Component} from "react";
+import React from "react";
 import {Route, Switch ,BrowserRouter} from "react-router-dom";
 import UsersRepositories from "./containers/UsersRepositories";
 import Error from "./containers/Error";
 
-export default class App extends Component {
+const App = () => {
 
-    render() {
         return (
             <>
                 <BrowserRouter>
@@ -17,5 +16,5 @@ export default class App extends Component {
             </>
         );
 
-    }
-}
+    };
+export default App;

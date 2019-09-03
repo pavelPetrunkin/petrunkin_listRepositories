@@ -4,7 +4,7 @@ import {
     GET_USER_REPOSITORIES_SUCCESS,
     SEARCH_REPOSITORIES_SUCCESS,
     FILTER_REPOSITORIES_SUCCESS,
-    GET_USER_REPOSITORES_FAILED,
+    GET_USER_REPOSITORIES_FAILED,
     CHANGE_PAGE_SUCCESS,
 } from '../actions/types';
 
@@ -25,15 +25,15 @@ export default function repositoriesReducer(state = initialState, action) {
     switch (action.type) {
         case GET_USER_REPOSITORIES_SUCCESS:
             return {...state,
-                repositories: payload.data,
-                requestSuccess: payload.status,
-                userName: payload.request.username,
-                userEmail: payload.request.email,
+                repositories: payload.userRepositories.data,
+                requestSuccess: payload.userRepositories.status,
+                userName: payload.userInfo.data.name,
+                userHtmlUrl: payload.userInfo.data.html_url,
                 searchText: '',
             };
-        case GET_USER_REPOSITORES_FAILED:
+        case GET_USER_REPOSITORIES_FAILED:
             return {...state,
-                requestSuccess: payload.status,
+                requestSuccess: 'error',
                 searchText: '',
             };
         case SEARCH_REPOSITORIES_SUCCESS:

@@ -9,17 +9,13 @@ const styles = {
     borderRadius: '7px'
 };
 
- const OneRepositories = (props) => {
+ const OneRepositories = ({oneRepositories}) => {
 
+     console.log(oneRepositories);
         return (
             <div style={styles}>
-                <h2>Title: {props.oneRepositories.name}</h2>
-                <p>Author: {props.oneRepositories.userName}</p>
-                <p>Text: {props.oneRepositories.text}</p>
-                <p><img
-                    style={{maxWidth: '78%'}}
-                    alt='No image'/></p>
-                <p>Tag: {props.oneRepositories.tag} </p>
+                <h2>Title: {oneRepositories.name}</h2>
+                <p>Url: <a href={oneRepositories.html_url}>{oneRepositories.html_url}</a></p>
             </div>
         );
     };

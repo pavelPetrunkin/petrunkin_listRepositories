@@ -5,7 +5,7 @@ import Select from 'react-select';
 
 const groupedOptions = [
     { value: 'All', label: 'All', color: '#00B8D9'},
-    { value: 'Tag', label: 'Tag', color: '#00B8D9'},
+    { value: 'Email', label: 'Email', color: '#00B8D9'},
     { value: 'Username', label: 'Username', color: '#00B8D9'},
 
 ];
