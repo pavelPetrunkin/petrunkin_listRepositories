@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../petrunkin_server/.idea/petrunkin_nodeJS.iml" filepath="$PROJECT_DIR$/../petrunkin_server/.idea/petrunkin_nodeJS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/petrunkin_reactredux.iml" filepath="$PROJECT_DIR$/.idea/petrunkin_reactredux.iml" />
+    </modules>
+  </component>
+</project>
