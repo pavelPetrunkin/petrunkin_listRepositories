@@ -12,6 +12,69 @@ code {
     monospace;
 }
 
+.modal-props {
+  margin:0 auto;
+  max-width:150px;
+  text-align: center;
+}
+
+.group-badge-styles {
+  background-color: #EBECF0;
+  border-radius: 2em;
+  color: #172B4D;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1;
+  min-width: 1px;
+  padding: 0.16666666666667em 0.5em;
+  text-align: center;
+}
+
+.modal-form {
+  margin: 0 auto;
+  max-width: 500px;
+}
+.modal-form input {
+  width: 100%;
+}
+
+.group-style {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.link {
+  color: #3f51b5;
+  text-decoration: none;
+  margin: 32px;
+}
+
+.organization-repositories {
+  margin:0 auto;
+  max-width:150px;
+  text-align: center;
+}
+
+.filter-panel {
+  margin:0 auto;
+  max-width:300px;
+  text-align: center;
+}
+
+.user-info {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+}
+
+.current-user {
+  flex-basis:100%;
+  text-align:center;
+}
+
 .form-group button {
   background: white;
   border: 2px solid lightblue;

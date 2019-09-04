@@ -11,8 +11,10 @@ const Pagination = (props) => {
     const handlePress = e => {
         setState({...state,
             currentPage:e.target.value
-        },() => props.onChangePage(state.currentPage));
+        });
     };
+
+    React.useEffect(() => props.onChangePage(state.currentPage));
 
         const pages = Math.ceil(props.pages.length / props.pageItems);
         const pageLinks = [...Array(pages).keys()].map( (item,i) =>

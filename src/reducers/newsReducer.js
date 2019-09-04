@@ -13,22 +13,23 @@ const initialState = {
     filterType:'All',
     searchText: '',
     currentPage: 1,
+    organization: '',
     pageItems: 3,
     userName:'',
-    userEmail:'',
-    requestSuccess:'',
+    requestSuccess:'Loading...',
+    orgRepositories: [],
 };
 
 export default function repositoriesReducer(state = initialState, action) {
     const {payload} = action;
-
     switch (action.type) {
         case GET_USER_REPOSITORIES_SUCCESS:
             return {...state,
                 repositories: payload.userRepositories.data,
-                requestSuccess: payload.userRepositories.status,
+                requestSuccess: 'Success',
                 userName: payload.userInfo.data.name,
                 userHtmlUrl: payload.userInfo.data.html_url,
+                organization: payload.userInfo.data.company,
                 searchText: '',
             };
         case GET_USER_REPOSITORIES_FAILED:

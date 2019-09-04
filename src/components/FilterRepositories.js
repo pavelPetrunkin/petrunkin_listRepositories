@@ -5,32 +5,16 @@ import Select from 'react-select';
 
 const groupedOptions = [
     { value: 'All', label: 'All', color: '#00B8D9'},
-    { value: 'Email', label: 'Email', color: '#00B8D9'},
-    { value: 'Username', label: 'Username', color: '#00B8D9'},
+    { value: 'URL', label: 'URL', color: '#00B8D9'},
+    { value: 'Repository', label: 'Repository', color: '#00B8D9'},
 
 ];
-const groupStyles = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-};
-const groupBadgeStyles = {
-    backgroundColor: '#EBECF0',
-    borderRadius: '2em',
-    color: '#172B4D',
-    display: 'inline-block',
-    fontSize: 12,
-    fontWeight: 'normal',
-    lineHeight: '1',
-    minWidth: 1,
-    padding: '0.16666666666667em 0.5em',
-    textAlign: 'center',
-};
+
 
 const formatGroupLabel = data => (
-    <div style={groupStyles}>
+    <div className='group-style'>
         <span>{data.label}</span>
-        <span style={groupBadgeStyles}>{data.options.length}</span>
+        <span className='group-badge-styles' >{data.options.length}</span>
     </div>
 );
 
@@ -39,11 +23,15 @@ const FilterRepositories = (props) => {
         sortType: 'All',
     });
 
+
+
     const handleChange = e => {
         setState({...state,
             sortType: e.value,
-        }, () => props.onChangeFilter(e.value))
+        });
     };
+
+    React.useEffect(() => props.ChangeFilter(state.sortType));
 
 
         return (
@@ -58,7 +46,7 @@ const FilterRepositories = (props) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onChangeFilter: filterType => {
+        ChangeFilter: filterType => {
             dispatch(filters(filterType));
         }
     };

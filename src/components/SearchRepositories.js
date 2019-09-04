@@ -24,15 +24,16 @@ const SearchRepositories = (props) => {
     const handleReset = () => {
         setState({...state,
             text:''
-        },() => props.onChangeSearch(state.text));
+        });
     };
+
+    React.useEffect(() => props.onChangeSearch(state.text));
 
         return (
             <div>
-                <form style={{margin: '0 auto', maxWidth: '500px'}} onSubmit={handleSubmit}>
+                <form  className='modal-form' onSubmit={handleSubmit}>
                     <div  className="form-group">
                         <input
-                            style={{width:'100%'}}
                             type="text"
                             placeholder="Name"
                             className="form-control"

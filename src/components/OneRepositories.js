@@ -9,12 +9,10 @@ const styles = {
     borderRadius: '7px'
 };
 
- const OneRepositories = ({oneRepositories}) => {
-
-     console.log(oneRepositories);
+ const OneRepositories = ({oneRepositories,organization}) => {
         return (
             <div style={styles}>
-                <h2>Title: {oneRepositories.name}</h2>
+                <h2>Repository name: {oneRepositories.name}</h2>
                 <p>Url: <a href={oneRepositories.html_url}>{oneRepositories.html_url}</a></p>
             </div>
         );

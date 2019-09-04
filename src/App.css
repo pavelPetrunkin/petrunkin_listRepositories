@@ -23,6 +23,22 @@
   color: #61dafb;
 }
 
+.nav-center {
+  background: gainsboro;
+  padding: 8px;
+  margin-bottom: 12px;
+}
+
+ p {
+   text-align: center;
+}
+
+.nav-header{
+  display: flex;
+  margin-left: 100px;
+}
+
+
 #logout:hover{
   background: white;
 }

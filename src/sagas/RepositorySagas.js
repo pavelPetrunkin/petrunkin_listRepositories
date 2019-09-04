@@ -7,38 +7,35 @@ function* getUserRepositories(action) {
     const payload = {};
 
     try {
-        payload.userInfo = yield call(async () => {
-                return await axios.get(userUrl);
-        });
+        payload.userInfo = yield call(axios.get,userUrl);
         if(payload.userInfo.status === 200) {
+            const orgUrl = payload.userInfo.data.organizations_url;
             const reposUrl = payload.userInfo.data.repos_url;
-            payload.userRepositories = yield call(async () => {
-                    return await axios.get(reposUrl);
-            });
+            payload.userRepositories = yield call(axios.get,reposUrl);
+            payload.orgRepositories = yield call(axios.get,orgUrl);
         }
 
         yield put({type: GET_USER_REPOSITORIES_SUCCESS, payload});
     } catch (e) {
-        console.log(e);
         yield put({type: "GET_USER_REPOSITORIES_FAILED", e});
     }
 }
 
-function* searchingNews (action) {
+function* searchingRepositories (action) {
     try {
         const payload = action.payload;
-        yield put({type: "SEARCH_NEWS_SUCCESS", payload});
+        yield put({type: "SEARCH_REPOSITORIES_SUCCESS", payload});
     } catch (e) {
-        yield put({type: "SEARCH_NEWS_FAILED", message: e.message});
+        yield put({type: "SEARCH_REPOSITORIES_FAILED", message: e.message});
     }
 }
 
-function* filterNews (action) {
+function* filterRepositories (action) {
     try {
         const payload = action.payload;
-        yield put({type: "FILTER_NEWS_SUCCESS", payload});
+        yield put({type: "FILTER_REPOSITORIES_SUCCESS", payload});
     } catch (e) {
-        yield put({type: "FILTER_NEWS_FAILED", message: e.message});
+        yield put({type: "FILTER_REPOSITORIES_FAILED", message: e.message});
     }
 }
 
@@ -51,12 +48,12 @@ function* changePages (action) {
     }
 }
 
-function* NewsSagas() {
-    yield takeEvery("SEARCH_NEWS", searchingNews);
-    yield takeEvery("FILTER_NEWS", filterNews);
+function* RepositorySagas() {
+    yield takeEvery("SEARCH_REPOSITORIES", searchingRepositories);
+    yield takeEvery("FILTER_REPOSITORIES", filterRepositories);
     yield takeEvery("CHANGE_PAGE", changePages);
     yield takeEvery("GET_USER_REQUEST", getUserRepositories);
 
 }
 
-export default NewsSagas;
+export default RepositorySagas;

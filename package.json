@@ -46,9 +46,9 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://pavelPetrunkin@bitbucket.org/pavelPetrunkin/petrunkin_reactredux.git"
+    "url": "git+https://github.com/pavelPetrunkin/petrunkin_listRepositories"
   },
   "author": "",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/pavelPetrunkin/petrunkin_reactredux#readme"
+  "homepage": "https://github.com/pavelPetrunkin/petrunkin_listRepositories#readme"
 }

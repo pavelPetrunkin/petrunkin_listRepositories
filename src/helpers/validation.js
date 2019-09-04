@@ -6,14 +6,4 @@ const userValidation = inputCheck => {
         };
 };
 
-const userTimerValidation = () => {
-    let name;
-    name = 'User Name';
-    return {
-            error: false,
-            value: name,
-        };
-};
-
-
-export  {userValidation,userTimerValidation};
+export  {userValidation};

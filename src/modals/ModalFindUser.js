@@ -1,74 +1,72 @@
 import React, {useEffect} from "react";
 import { connect } from 'react-redux';
-import {inputCheck,checkEmptyFields,validateUser} from '../helpers/inputCheck';
+import {checkEmptyFields,validateUser} from '../helpers/inputCheck';
 import {
     Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
-    TextField
 } from "@material-ui/core";
-import {userValidation, userTimerValidation} from "../helpers/validation";
+import {userValidation} from "../helpers/validation";
 import {findUser} from '../actions/index';
-
+import ModalFind from "./ModalFind";
+import ModalStatus from "./ModalStatus";
 
 const FindUser = (props) => {
 
     const [state, setState] = React.useState({
-        values: {
-            userName: '',
-        },
-        fieldUserName: {
-            error: false,
-            value: 'User Name',
-        },
-        open: false,
-        openResult: false,
-        timer: false,
+        userName : '',
     });
 
-    const handleChange = value => event => {
-        let findUser = state.values;
-        findUser[value] = inputCheck(event.target.value);
-        setState({...state,
-            userName: findUser
+    const [fieldUserName, setFieldUserName] = React.useState({ fieldUserName: {
+            error: false,
+            value: 'User Name',
+        }});
+
+    const [open, setOpen] = React.useState({ open: false });
+
+    const [openResult, setOpenResult] = React.useState({ openResult: false });
+
+    const [timer, setTimer] = React.useState({ timer: false });
+
+    const handleChange = value => {
+        setState({
+            userName: value
         });
     };
 
     const handleClickOpen = () => {
-        setState({...state,
+        setOpen({
             open: true
         });
     };
 
     const handleClose = () => {
-        setState({...state,
+        setOpen({
             open: false,
         });
     };
 
     const handleResultClose = () => {
-        setState({...state,
+        setOpenResult({
             openResult: false,
         })
     };
 
     useEffect(() => {
-
-        if(state.openResult){
+        if(openResult.openResult){
             setTimeout(() => {
                 handleResultClose();
             }, 3000);
         }
-        if(state.timer){
+        if(timer.timer){
             setTimeout( () => {
-                let objectFields = userTimerValidation();
-                setState(
-                    {...state,
-                        timer:false,
-                        fieldUserName: objectFields,
+                setFieldUserName({
+                    fieldUserName: {
+                        error: false,
+                        value: 'User name',
+                    },
+                });
+                setTimer(
+                    {
+                        timer:false
                     }
                 );
             }, 3000)
@@ -76,30 +74,31 @@ const FindUser = (props) => {
     });
 
     const handleFind = () => {
-        let userName = checkEmptyFields(state.values);
+        let userName = checkEmptyFields(state);
         const inputCheck = validateUser(userName);
         if(inputCheck){
-            props.onFindUser(userName);
-            setState({
-                ...state,
-                open:false,
+            props.findUser(userName);
+            setOpen({
+                open: false
+            });
+            setOpenResult({
                 openResult: true
             });
         } else {
             let objectFields = userValidation(inputCheck);
-            if(!state.timer){
-                setState({...state,
-                    timer: true,
-                    fieldUserName: objectFields,
+            if(!timer.timer){
+                setTimer({
+                    timer: true
+                });
+                setFieldUserName({
+                    fieldUserName: objectFields
                 });
             } else{
-                setState({...state,
-                    fieldUserName: objectFields,
+                setFieldUserName({
+                    fieldUserName: objectFields
                     }
                 );
             }
-
-
         }
     };
     return (
@@ -107,50 +106,18 @@ const FindUser = (props) => {
             <Button variant="outlined" color="primary" onClick={() => handleClickOpen()}>
                 Find user GitHub
             </Button>
-            <Dialog  open={state.open} onClose={() => handleClose()} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Find repositories of user</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                    </DialogContentText>
+            <ModalFind open={open.open}
+                       state={state}
+                       fieldUserName={fieldUserName.fieldUserName}
+                       handleClose={handleClose}
+                       handleFind={handleFind}
+                       handleChange={handleChange}
+                       />
 
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="userName"
-                        name='userName'
-                        label={state.fieldUserName.value}
-                        placeholder="*Required"
-                        type="text"
-                        defaultValue={''}
-                        onChange={handleChange('userName')}
-                        error={state.fieldUserName.error}
-                        fullWidth
-                    />
-
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={() => handleClose()} color="primary">
-                        Cancel
-                    </Button>
-                    <Button onClick={() => handleFind()} color="primary">
-                        Find user
-                    </Button>
-                </DialogActions>
-            </Dialog>
-
-            <Dialog  open={state.openResult} onClose={() => handleResultClose()} aria-labelledby="form-dialog-title">
-                <DialogContent>
-                    <DialogContentText>
-                        {props.requestSuccess}
-                    </DialogContentText>
-
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={() => handleResultClose()} color="primary">
-                        Ok
-                    </Button>
-                </DialogActions>
-            </Dialog>
+            <ModalStatus requestSuccess={props.requestSuccess}
+                         handleResultClose={handleResultClose}
+                         openResult={openResult.openResult}
+                         />
         </div>
     );
 };
@@ -158,13 +125,12 @@ const FindUser = (props) => {
 const mapStateToProps = state => {
     return {
         requestSuccess: state.data.requestSuccess,
-        repositories: state.data.repositories,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFindUser: (userName) => {
+        findUser: (userName) => {
             dispatch(findUser(userName))
         },
     };
