@@ -21,18 +21,12 @@ test('paginationFilter', () => {
         {name:'bie',html_url:'two'},
         {name:'howareyou',html_url:'three'}
     ];
-    const value = paginationFilter(repositories,'All','hello',1,2);
+    let value = paginationFilter(repositories,'All','hello',1,2);
     expect(value.fullFilter.length).toBe(1);
-});
 
-test('paginationFilter', () => {
-    const repositories = [
-        {name:'hellohi',html_url:'one'},
-        {name:'bie',html_url:'two'},
-        {name:'howareyou',html_url:'three'}
-    ];
-    const value = paginationFilter(repositories,'All','i',1,2);
+    value = paginationFilter(repositories,'All','i',1,2);
     expect(value.fullFilter.length).toBe(2);
+
 });
 
 it('renders without crashing', () => {

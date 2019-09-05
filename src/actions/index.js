@@ -6,13 +6,6 @@ import {
     CHANGE_PAGE,
 } from './types';
 
-export const getUserRepositories = id => {
-    return {
-        type: GET_USER_REPOSITORIES_REQUEST,
-        payload: id
-    }
-};
-
 export const findUser = (userName) => {
     return {
         type: GET_USER_REQUEST,
