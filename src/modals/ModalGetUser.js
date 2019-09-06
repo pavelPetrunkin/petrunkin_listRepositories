@@ -9,54 +9,44 @@ import {findUser} from '../actions/index';
 import ModalFind from "./ModalFind";
 import ModalStatus from "./ModalStatus";
 
-const FindUser = (props) => {
+const ModalGetUser = (props) => {
 
-    const [state, setState] = React.useState({
-        userName : '',
-    });
+    const [name, setName] = React.useState('');
 
     const [fieldUserName, setFieldUserName] = React.useState({ fieldUserName: {
             error: false,
             value: 'User Name',
         }});
 
-    const [open, setOpen] = React.useState({ open: false });
+    const [open, setOpen] = React.useState(false);
 
-    const [openResult, setOpenResult] = React.useState({ openResult: false });
+    const [openStatus, setOpenStatus] = React.useState(false );
 
-    const [timer, setTimer] = React.useState({ timer: false });
+    const [timer, setTimer] = React.useState(false);
 
     const handleChange = value => {
-        setState({
-            userName: value
-        });
+        setName(value);
     };
 
     const handleClickOpen = () => {
-        setOpen({
-            open: true
-        });
+        setOpen(true);
     };
 
     const handleClose = () => {
-        setOpen({
-            open: false,
-        });
+        setOpen(false);
     };
 
-    const handleResultClose = () => {
-        setOpenResult({
-            openResult: false,
-        })
+    const handleStatusClose = () => {
+        setOpenStatus(false)
     };
 
     useEffect(() => {
-        if(openResult.openResult){
+        if(openStatus){
             setTimeout(() => {
-                handleResultClose();
+                handleStatusClose();
             }, 3000);
         }
-        if(timer.timer){
+        if(timer){
             setTimeout( () => {
                 setFieldUserName({
                     fieldUserName: {
@@ -64,32 +54,22 @@ const FindUser = (props) => {
                         value: 'User name',
                     },
                 });
-                setTimer(
-                    {
-                        timer:false
-                    }
-                );
+                setTimer(false);
             }, 3000)
         }
     });
 
     const handleFind = () => {
-        let userName = checkEmptyFields(state);
+        let userName = checkEmptyFields(name);
         const inputCheck = validateUser(userName);
         if(inputCheck){
             props.findUser(userName);
-            setOpen({
-                open: false
-            });
-            setOpenResult({
-                openResult: true
-            });
+            setOpen(false);
+            setOpenStatus(true);
         } else {
             let objectFields = userValidation(inputCheck);
-            if(!timer.timer){
-                setTimer({
-                    timer: true
-                });
+            if(!timer){
+                setTimer(true);
                 setFieldUserName({
                     fieldUserName: objectFields
                 });
@@ -106,8 +86,7 @@ const FindUser = (props) => {
             <Button variant="outlined" color="primary" onClick={() => handleClickOpen()}>
                 Find user GitHub
             </Button>
-            <ModalFind open={open.open}
-                       state={state}
+            <ModalFind open={open}
                        fieldUserName={fieldUserName.fieldUserName}
                        handleClose={handleClose}
                        handleFind={handleFind}
@@ -115,8 +94,8 @@ const FindUser = (props) => {
                        />
 
             <ModalStatus requestSuccess={props.requestSuccess}
-                         handleResultClose={handleResultClose}
-                         openResult={openResult.openResult}
+                         handleStatusClose={handleStatusClose}
+                         openStatus={openStatus}
                          />
         </div>
     );
@@ -139,4 +118,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(FindUser);
+)(ModalGetUser);

@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
-import ModalFindUser from "../modals/ModalFindUser";
+import ModalGetUser from "../modals/ModalGetUser";
 
 const FindUser = (props) => {
         return (
             <div>
                 <div className='modal-props'>
-                    <ModalFindUser/>
+                    <ModalGetUser/>
                 </div>
                 <div className='user-info'>
                 {props.userName ?

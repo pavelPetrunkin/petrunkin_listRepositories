@@ -19,6 +19,27 @@
   color: white;
 }
 
+.link-repositories {
+  text-decoration: none;
+  color: brown;
+}
+
+.pagination {
+  display:flex;
+  width:100%;
+  justify-content:center;
+}
+
+.one-repository {
+  border-bottom: 2px solid #eee;
+  background: #fafafa;
+  margin: .75rem auto;
+  padding: .6rem 1rem;
+  max-width: 500px;
+  border-radius: 7px;
+}
+
+
 .App-link {
   color: #61dafb;
 }

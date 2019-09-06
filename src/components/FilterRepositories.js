@@ -31,7 +31,7 @@ const FilterRepositories = (props) => {
         });
     };
 
-    React.useEffect(() => props.ChangeFilter(state.sortType));
+    React.useEffect(() => props.changeFilter(state.sortType));
 
 
         return (
@@ -46,7 +46,7 @@ const FilterRepositories = (props) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        ChangeFilter: filterType => {
+        changeFilter: filterType => {
             dispatch(filters(filterType));
         }
     };

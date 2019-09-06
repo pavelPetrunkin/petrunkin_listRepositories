@@ -12,7 +12,7 @@ const UserRepositories = (props) => {
             props.pageItems,
         );
     return (
-        <RepositoriesPage renderRepositories={renderRepositories} userName={props.userName} />
+        <RepositoriesPage organization={props.organization} renderRepositories={renderRepositories} userName={props.userName} />
     );
 };
 
@@ -24,6 +24,7 @@ const mapStateToProps = state => {
         filterType: state.data.filterType,
         currentPage: state.data.currentPage,
         pageItems: state.data.pageItems,
+        organization: state.data.organization,
     };
 };
 

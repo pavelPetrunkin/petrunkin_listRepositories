@@ -14,13 +14,13 @@ const Pagination = (props) => {
         });
     };
 
-    React.useEffect(() => props.ChangePage(state.currentPage));
+    React.useEffect(() => props.changePage(state.currentPage));
 
         const countPages = Math.ceil(props.pages.length / props.pageItems);
         const pageLinks = [...Array(countPages).keys()].map( (item,i) =>
             <input key={i+1} type="submit" value={i+1} onClick={handlePress}/>);
         return (
-            <div style={{display:'flex',width:'100%',justifyContent:'center'}}>
+            <div className='pagination'>
                 {pageLinks}
             </div>
         );
@@ -28,7 +28,7 @@ const Pagination = (props) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        ChangePage: currentPage => {
+        changePage: currentPage => {
             dispatch(changePage(currentPage));
         },
     };

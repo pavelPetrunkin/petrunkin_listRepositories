@@ -9,14 +9,14 @@ import {
 
 const ModalStatus = (props) => {
     return (
-        <Dialog  open={props.openResult} onClose={() => props.handleResultClose()} aria-labelledby="form-dialog-title">
+        <Dialog  open={props.openStatus} onClose={() => props.handleStatusClose()} aria-labelledby="form-dialog-title">
             <DialogContent>
                 <DialogContentText>
                     {props.requestSuccess}
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button onClick={() => props.handleResultClose()} color="primary">
+                <Button onClick={() => props.handleStatusClose()} color="primary">
                     Ok
                 </Button>
             </DialogActions>

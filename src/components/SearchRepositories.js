@@ -17,7 +17,7 @@ const SearchRepositories = (props) => {
     const handleSubmit = e => {
         e.preventDefault();
         if (state.text.trim()) {
-            props.onChangeSearch(state.text);
+            props.changeSearch(state.text);
         }
     };
 
@@ -27,7 +27,7 @@ const SearchRepositories = (props) => {
         });
     };
 
-    React.useEffect(() => props.onChangeSearch(state.text));
+    React.useEffect(() => props.changeSearch(state.text));
 
         return (
             <div>
@@ -55,7 +55,7 @@ const SearchRepositories = (props) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onChangeSearch: searchText => {
+        changeSearch: searchText => {
             dispatch(searchRepositories(searchText));
         },
     };

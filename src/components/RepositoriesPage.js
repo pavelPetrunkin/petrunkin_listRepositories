@@ -7,7 +7,13 @@ import React from "react";
 const RepositoriesPage = (props) => {
     return <div>
         <div className='organization-repositories'>
-            {props.userName ? <p>Organization repositories</p> : <p>No user</p>}
+            {props.userName ?
+                <>
+                    <p>Organization repositories</p>
+                    <p>User: {props.userName}</p>
+                    <p>Organization:{props.organization}</p>
+                </>
+                : <p>No user</p>}
         </div>
         <div className='filter-panel'>
             <FilterRepositories />

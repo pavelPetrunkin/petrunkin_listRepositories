@@ -3,7 +3,7 @@ import {GET_USER_REPOSITORIES_SUCCESS} from "../actions/types";
 import axios from 'axios';
 
 function* getUserRepositories(action) {
-    const userUrl = `https://api.github.com/users/${action.payload.userName}`;
+    const userUrl = `https://api.github.com/users/${action.payload}`;
     const payload = {};
 
     try {

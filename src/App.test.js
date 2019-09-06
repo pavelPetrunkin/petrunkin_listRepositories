@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import RepositorySagas from './sagas/RepositorySagas';
 import App from './App';
@@ -18,14 +18,14 @@ sagaMiddleware.run(RepositorySagas);
 test('paginationFilter', () => {
     const repositories = [
         {name:'hellohi',html_url:'one'},
-        {name:'bie',html_url:'two'},
+        {name:'bye',html_url:'two'},
         {name:'howareyou',html_url:'three'}
     ];
-    let value = paginationFilter(repositories,'All','hello',1,2);
-    expect(value.fullFilter.length).toBe(1);
+    let value = paginationFilter(repositories,'All','e',1,3);
+    expect(value.fullFilter.length).toBe(3);
 
     value = paginationFilter(repositories,'All','i',1,2);
-    expect(value.fullFilter.length).toBe(2);
+    expect(value.fullFilter.length).toBe(1);
 
 });
 
